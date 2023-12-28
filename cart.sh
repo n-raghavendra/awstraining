@@ -1,0 +1,72 @@
+#! /bin/bash
+
+ID=$(id -u)
+R="\e[31m"
+G="\e[32m"
+Y="\e[33m"
+N="\e[0m"
+TIMESTAMP= "$date +%F-%H-%M-%S"
+LOGFILE= "/tmp/$0-$TIMESTAMP.log"
+
+if [ $ID -ne 0 ]
+then
+    echo "$R ERROR: Please run the script with Root User $N"
+    exit 1
+else
+    echo "$G You are Root User $N"
+fi
+
+VALIDATE() {
+if [[ $1 -ne 0 ]];
+then
+    echo "$R $2 is FAILED $N"
+    exit 1
+else
+    echo "$G $2 is SUCCESS $N"
+fi
+}
+
+dnf module disable nodejs -y &>> $LOGFILE
+VALIDATE $? "Disable nodejs"
+
+dnf module enable nodejs:18 -y &>> $LOGFILE
+VALIDATE $? "Enable nodejs"
+
+dnf install nodejs -y &>> $LOGFILE
+VALIDATE $? "Install nodejs"
+
+id roboshop
+if [ $? -ne 0 ]
+then
+    useradd roboshop
+    VALIDATE $? "add roboshop user"
+else
+    echo "$R User already exists skipping $N"
+fi
+
+mkdir -p /app &>> $LOGFILE
+VALIDATE $? "create app folder"
+
+curl -L -o /tmp/cart.zip https://roboshop-builds.s3.amazonaws.com/cart.zip &>> $LOGFILE
+VALIDATE $? "download cart.zip"
+
+cd /app 
+
+unzip -o /tmp/cart.zip &>> $LOGFILE
+VALIDATE $? "unzip cart"
+
+npm install &>> $LOGFILE
+VALIDATE $? "install dependencies"
+
+cp /home/centos/robopractice/cart.service /etc/systemd/system/cart.service &>> $LOGFILE
+VALIDATE $? "copy cart.service"
+
+systemctl daemon-reload &>> $LOGFILE
+VALIDATE $? "daemon reload"
+
+systemctl enable cart &>> $LOGFILE
+VALIDATE $? "enable cart"
+
+systemctl start cart &>> $LOGFILE
+VALIDATE $? "start cart"
+
