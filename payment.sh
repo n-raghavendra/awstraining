@@ -52,7 +52,7 @@ VALIDATE $? "unzip payment.zip"
 pip3.6 install -r requirements.txt &>> $LOGFILE
 VALIDATE $? "installing dependencies"
 
-cp /home/centos/robopractice/payment.service /etc/systemd/system/payment.service &>> $LOGFILE
+cp -R /home/centos/robopractice/payment.service /etc/systemd/system/payment.service &>> $LOGFILE
 VALIDATE $? "copying payment.service"
 
 systemctl daemon-reload &>> $LOGFILE

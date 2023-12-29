@@ -58,7 +58,7 @@ VALIDATE $? "unzip user.zip"
 npm install &>> $LOGFILE
 VALIDATE $? "Download Dependencies"
 
-cp /home/centos/robopractice/user.service /etc/systemd/system/user.service &>> $LOGFILE
+cp -R /home/centos/robopractice/user.service /etc/systemd/system/user.service &>> $LOGFILE
 VALIDATE $? "copy user.service"
 
 systemctl daemon-reload &>> $LOGFILE
@@ -70,7 +70,7 @@ VALIDATE $? "enable user"
 systemctl start user &>> $LOGFILE
 VALIDATE $? "start user"
 
-cp /home/centos/robopractice/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
+cp -R /home/centos/robopractice/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
 VALIDATE $? "copy mongo.repo"
 
 dnf install mongodb-org-shell -y &>> $LOGFILE

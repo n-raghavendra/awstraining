@@ -71,7 +71,7 @@ VALIDATE $? "enable catalogue"
 systemctl start catalogue &>> $LOGFILE
 VALIDATE $? "start catalogue"
 
-cp /home/centos/robopractice/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
+cp -R /home/centos/robopractice/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
 VALIDATE $? "copy mongo.repo"
 
 dnf install mongodb-org-shell -y &>> $LOGFILE

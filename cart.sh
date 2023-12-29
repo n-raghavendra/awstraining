@@ -58,7 +58,7 @@ VALIDATE $? "unzip cart"
 npm install &>> $LOGFILE
 VALIDATE $? "install dependencies"
 
-cp /home/centos/robopractice/cart.service /etc/systemd/system/cart.service &>> $LOGFILE
+cp -R /home/centos/robopractice/cart.service /etc/systemd/system/cart.service &>> $LOGFILE
 VALIDATE $? "copy cart.service"
 
 systemctl daemon-reload &>> $LOGFILE
