@@ -58,7 +58,7 @@ VALIDATE $? "unzip user.zip"
 npm install &>> $LOGFILE
 VALIDATE $? "Download Dependencies"
 
-cp -R /home/centos/robopractice/user.service /etc/systemd/system/user.service &>> $LOGFILE
+cp /home/centos/Robopractice/user.service /etc/systemd/system/user.service &>> $LOGFILE
 VALIDATE $? "copy user.service"
 
 systemctl daemon-reload &>> $LOGFILE

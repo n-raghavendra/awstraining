@@ -5,8 +5,8 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-TIMESTAMP=$(date +%F-%H-%M-%S)
-LOGFILE="/tmp/$0-$TIMESTAMP.log"
+TIMESTAMP = $(date +%F-%H-%M-%S)
+LOGFILE = "/tmp/$0-$TIMESTAMP.log"
 
 
 VALIDATE(){
@@ -59,7 +59,7 @@ VALIDATE $? "unzip catalogue.zip"
 npm install &>> $LOGFILE
 VALIDATE $? "install depedencies"
 
-cp -R /home/centos/Robopractice/catalogue.service /etc/systemd/system/catalogue.service &>> $LOGFILE
+cp /home/centos/Robopractice/catalogue.service /etc/systemd/system/catalogue.service &>> $LOGFILE
 VALIDATE $? "copy catalogue.service"
 
 systemctl daemon-reload &>> $LOGFILE
@@ -71,7 +71,7 @@ VALIDATE $? "enable catalogue"
 systemctl start catalogue &>> $LOGFILE
 VALIDATE $? "start catalogue"
 
-cp -R /home/centos/robopractice/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
+cp /home/centos/Robopractice/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
 VALIDATE $? "copy mongo.repo"
 
 dnf install mongodb-org-shell -y &>> $LOGFILE

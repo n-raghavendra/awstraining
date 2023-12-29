@@ -26,7 +26,7 @@ else
     echo -e "$G You are Root User $N"
 fi
 
-cp -R /home/centos/robopractice/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
+cp /home/centos/Robopractice/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
 
 VALIDATE $? "Copying Mongorepo"
 
