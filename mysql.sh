@@ -9,13 +9,13 @@ TIMESTAMP=$(date +%F-%H-%M-%S)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
 
 
-VALIDATE() {
+VALIDATE(){
 if [ $1 -ne 0 ]
 then
-    echo "$R $2 is FAILED $N"
+    echo "$2.. $R is FAILED $N"
     exit 1
 else
-    echo "$G $2 is SUCCESS $N"
+    echo "$2.. $G is SUCCESS $N"
 fi
 }
 
