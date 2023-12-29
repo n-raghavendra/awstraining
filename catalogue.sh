@@ -59,7 +59,7 @@ VALIDATE $? "unzip catalogue.zip"
 npm install &>> $LOGFILE
 VALIDATE $? "install depedencies"
 
-cp /home/centos/Robopractice/catalogue.service /etc/systemd/system/catalogue.service &>> $LOGFILE
+cp -R /home/centos/Robopractice/catalogue.service /etc/systemd/system/catalogue.service &>> $LOGFILE
 VALIDATE $? "copy catalogue.service"
 
 systemctl daemon-reload &>> $LOGFILE
