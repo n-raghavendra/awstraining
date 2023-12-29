@@ -31,7 +31,7 @@ fi
 dnf module disable mysql -y &>> $LOGFILE
 VALIDATE $? "Disable mysql"
 
-cp /home/centos/robopractice/mysql.repo /etc/yum.repos.d/mysql.repo &>> $LOGFILE
+cp mysql.repo /etc/yum.repos.d/mysql.repo &>> $LOGFILE
 VALIDATE $? "copying mysql.repo"
 
 dnf install mysql-community-server -y &>> $LOGFILE
