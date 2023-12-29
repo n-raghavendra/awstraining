@@ -5,8 +5,18 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-TIMESTAMP= $(date +%F-%H-%M-%S)
-LOGFILE= "/tmp/$0-$TIMESTAMP.log"
+TIMESTAMP=$(date +%F-%H-%M-%S)
+LOGFILE="/tmp/$0-$TIMESTAMP.log"
+
+VALIDATE(){
+if [ $1 -ne 0 ]
+then
+    echo "$2.. $R is FAILED $N"
+    exit 1
+else
+    echo "$2.. $G is SUCCESS $N"
+fi
+}
 
 if [ $ID -ne 0 ]
 then
@@ -15,16 +25,6 @@ then
 else
     echo "$G You are Root User $N"
 fi
-
-VALIDATE() {
-if [[ $1 -ne 0 ]];
-then
-    echo "$R $2 is FAILED $N"
-    exit 1
-else
-    echo "$G $2 is SUCCESS $N"
-fi
-}
 
 dnf install maven -y &>> $LOGFILE
 VALIDATE $? "Installing maven"
