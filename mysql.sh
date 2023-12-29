@@ -6,7 +6,6 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
-MONGDB_HOST=mongodb.awstraining.tech
 TIMESTAMP=$(date +%F-%H-%M-%S)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
 
