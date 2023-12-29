@@ -8,6 +8,7 @@ N="\e[0m"
 TIMESTAMP=$(date +%F-%H-%M-%S)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
 
+
 VALIDATE(){
 if [ $1 -ne 0 ]
 then
@@ -58,7 +59,7 @@ VALIDATE $? "unzip catalogue.zip"
 npm install &>> $LOGFILE
 VALIDATE $? "install depedencies"
 
-cp /home/centos/robopractice/catalogue.service /etc/systemd/system/catalogue.service &>> $LOGFILE
+cp catalogue.service /etc/systemd/system/catalogue.service &>> $LOGFILE
 VALIDATE $? "copy catalogue.service"
 
 systemctl daemon-reload &>> $LOGFILE
