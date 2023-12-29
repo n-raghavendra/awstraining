@@ -1,55 +1,46 @@
-#!/bin/bash
+#! /bin/bash
 
 ID=$(id -u)
 R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-MONGDB_HOST=mongodb.daws76s.online
-
 TIMESTAMP=$(date +%F-%H-%M-%S)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
 
-echo "script stareted executing at $TIMESTAMP" &>> $LOGFILE
 
-VALIDATE(){
-    if [ $1 -ne 0 ]
-    then
-        echo -e "$2 ... $R FAILED $N"
-        exit 1
-    else
-        echo -e "$2 ... $G SUCCESS $N"
-    fi
+VALIDATE() {
+if [ $1 -ne 0 ]
+then
+    echo "$R $2 is FAILED $N"
+    exit 1
+else
+    echo "$G $2 is SUCCESS $N"
+fi
 }
 
 if [ $ID -ne 0 ]
 then
-    echo -e "$R ERROR:: Please run this script with root access $N"
-    exit 1 # you can give other than 0
+    echo "$R ERROR: Please run the script with Root User $N"
+    exit 1
 else
-    echo "You are root user"
-fi # fi means reverse of if, indicating condition end
+    echo "$G You are Root User $N"
+fi
 
 dnf module disable mysql -y &>> $LOGFILE
-
-VALIDATE $? "Disable current MySQL version"
+VALIDATE $? "Disable mysql"
 
 cp /home/centos/robopractice/mysql.repo /etc/yum.repos.d/mysql.repo &>> $LOGFILE
-
-VALIDATE $? "Copied MySQl repo"
+VALIDATE $? "copying mysql.repo"
 
 dnf install mysql-community-server -y &>> $LOGFILE
+VALIDATE $? "Installing mysql"
 
-VALIDATE $? "Installing MySQL Server"
-
-systemctl enable mysqld &>> $LOGFILE 
-
-VALIDATE $? "Enabling MySQL Server"
+systemctl enable mysqld &>> $LOGFILE
+VALIDATE $? "enabling musql"
 
 systemctl start mysqld &>> $LOGFILE
-
-VALIDATE $? "Starting  MySQL Server" 
+VALIDATE $? "starting mysql"
 
 mysql_secure_installation --set-root-pass RoboShop@1 &>> $LOGFILE
-
-VALIDATE $? "Setting  MySQL root password"
+VALIDATE $? "setpassword user"
