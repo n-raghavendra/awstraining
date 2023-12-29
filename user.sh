@@ -11,19 +11,19 @@ LOGFILE="/tmp/$0-$TIMESTAMP.log"
 VALIDATE(){
 if [ $1 -ne 0 ]
 then
-    echo "$2.. $R is FAILED $N"
+    echo -e "$2.. $R is FAILED $N"
     exit 1
 else
-    echo "$2.. $G is SUCCESS $N"
+    echo -e "$2.. $G is SUCCESS $N"
 fi
 }
 
 if [ $ID -ne 0 ]
 then
-    echo "$R ERROR: Please run the script with Root User $N"
+    echo -e "$R ERROR: Please run the script with Root User $N"
     exit 1
 else
-    echo "$G You are Root User $N"
+    echo -e "$G You are Root User $N"
 fi
 
 dnf module disable nodejs -y &>> $LOGFILE
@@ -41,7 +41,7 @@ then
     useradd roboshop
     VALIDATE $? "add roboshop user"
 else
-    echo "$R User already exists skipping $N"
+    echo -e "$R User already exists skipping $N"
 fi
 
 mkdir -p /app &>> $LOGFILE
@@ -70,7 +70,7 @@ VALIDATE $? "enable user"
 systemctl start user &>> $LOGFILE
 VALIDATE $? "start user"
 
-cp -R /home/centos/robopractice/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
+cp /home/centos/robopractice/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
 VALIDATE $? "copy mongo.repo"
 
 dnf install mongodb-org-shell -y &>> $LOGFILE
