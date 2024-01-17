@@ -14,7 +14,7 @@ INST_TYPE="t2.micro"
 else
 INST_TYPE="t3.small"
 fi
-aws ec2 run-instances --image-id $AMI_ID --instance-type $INST_TYPE --security-group-ids $SG_ID --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$i}]" --query 'Instances[0].PrivateIpAddress' --output text)
-echo "$i: $PrivateIpAddress"
+IPAddress=$(aws ec2 run-instances --image-id $AMI_ID --instance-type $INST_TYPE --security-group-ids $SG_ID --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$i}]" --query 'Instances[0].PrivateIpAddress' --output text)
+echo "$i: $IPAddress"
 
 done
