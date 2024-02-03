@@ -24,5 +24,5 @@ echo "$i: $IPAddress"
 
 aws route53 change-resource-record-sets \
   --hosted-zone-id $Hosted_Zone \
-  --change-batch '{"Changes":[{"Action":"UPSERT","ResourceRecordSet":{"Name":"'$i'.'$Domain'","Type":"A","TTL":1,"ResourceRecords":[{"Value":"$IPAddress"}]}}]}'
+  --change-batch '{"Changes":[{"Action":"UPSERT","ResourceRecordSet":{"Name":"'$i'.'$Domain'","Type":"A","TTL":1,"ResourceRecords":[{"Value":"'$IPAddress'"}]}}]}'
 done
