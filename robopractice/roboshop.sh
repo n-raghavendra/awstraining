@@ -8,7 +8,7 @@ INSTANCES=("mongodb" "mysql" "payment" "rabbitmq" "shipping" "user" "catalogue" 
 for i in "${INSTANCES[@]}"
 do
 
-if [ $i == mongodb ] ||  [ $i == mqsql ] || [ $i == rabbitmq ]
+if [ $i == "mongodb" ] ||  [ $i == "mqsql" ] || [ $i == "rabbitmq" ]
 then
 INST_TYPE="t2.micro"
 else
