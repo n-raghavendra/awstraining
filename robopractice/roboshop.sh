@@ -3,6 +3,7 @@
 AMI_ID=ami-0f3c7d07486cad139
 SG_ID=sg-06fddf57d42e4ea90
 Domain=awstraining.tech
+Hosted_Zone=Z07454949CC3UO7UUO1I
 
 INSTANCES=("mongodb" "mysql" "payment" "rabbitmq" "shipping" "user" "catalogue" "cart" "redis" "web")
 
@@ -22,6 +23,6 @@ echo "$i: $IPAddress"
 #create route 53
 
 aws route53 change-resource-record-sets \
-  --hosted-zone-id Z07454949CC3UO7UUO1I \
-  --change-batch '{"Changes":[{"Action":"UPSERT","ResourceRecordSet":{"Name":"$i.$Domain","Type":"A","TTL":1,"ResourceRecords":[{"Value":"$i"}]}}]}'
+  --hosted-zone-id $Hosted_Zone \
+  --change-batch '{"Changes":[{"Action":"UPSERT","ResourceRecordSet":{"Name":"'$i'.'$Domain'","Type":"A","TTL":1,"ResourceRecords":[{"Value":"$IPAddress"}]}}]}'
 done
