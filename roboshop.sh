@@ -5,7 +5,7 @@ SG_ID=sg-06fddf57d42e4ea90
 Domain=awstraining.tech
 Hosted_Zone=Z07454949CC3UO7UUO1I
 
-INSTANCES=("mongodb" "mysql" "payment" "rabbitmq" "shipping" "user" "catalogue" "cart" "redis" "web")
+INSTANCES=("mongodb" "mysql" "payment" "rabbitmq" "shipping" "user" "catalogue" "cart" "redis" "web" "dispatch")
 
 for i in "${INSTANCES[@]}"
 do
